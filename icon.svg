@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="West Austin Lightworks">
+  <rect width="512" height="512" rx="96" fill="#1d3a2c"/>
+  <path d="M56 190 C 160 300, 352 300, 456 190" fill="none" stroke="#8ea48f" stroke-width="7" stroke-linecap="round"/>
+  <g>
+    <circle cx="256" cy="270" r="34" fill="#b0392f"/>
+    <circle cx="152" cy="250" r="34" fill="#ffecc4"/>
+    <circle cx="360" cy="250" r="34" fill="#ffecc4"/>
+    <circle cx="78" cy="196" r="30" fill="#b0392f"/>
+    <circle cx="434" cy="196" r="30" fill="#b0392f"/>
+    <circle cx="245" cy="258" r="10" fill="#ffffff" opacity=".55"/>
+    <circle cx="141" cy="238" r="10" fill="#ffffff" opacity=".7"/>
+    <circle cx="349" cy="238" r="10" fill="#ffffff" opacity=".7"/>
+  </g>
+</svg>
