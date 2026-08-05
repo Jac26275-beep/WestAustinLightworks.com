@@ -1,9 +1,15 @@
-/* West Austin Lightworks — progressive enhancement.
-   The site works fully without this file: the Netlify form posts normally and
-   the browser's native validation runs. This layer adds inline errors, an
-   on-page success panel (no redirect), and analytics events. */
+/* West Austin Lightworks — progressive enhancement (static host / GitHub Pages).
+   No backend: the quote form composes a group text to both owners from the
+   visitor's phone. The page still works without this file — the browser's
+   native validation runs and the "text us both" links open a group message.
+   This layer adds inline errors, the group-text compose step, a confirmation
+   panel, and analytics events. */
 (function () {
   "use strict";
+
+  var ASHBY = "+17132546153";
+  var GATES = "+14096567217";
+  var GROUP = "sms:" + ASHBY + "," + GATES; // group text to both owners
 
   function track(name, props) {
     if (typeof window.plausible === "function") window.plausible(name, props ? { props: props } : undefined);
@@ -74,27 +80,43 @@
     if (e.target.id) setError(e.target.id, "");
   });
 
+  function val(id) { return (document.getElementById(id).value || "").trim(); }
+
   form.addEventListener("submit", function (e) {
-    if (!validate()) { e.preventDefault(); return; }
     e.preventDefault();
-    var body = new URLSearchParams(new FormData(form)).toString();
-    var btn = form.querySelector('button[type="submit"]');
-    if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: body
-    }).then(function () {
-      track("quote_form_submit");
-      wrap.innerHTML =
-        '<div class="form-success" role="status">' +
-        '<h3>Got it — we’ll text you back within 2 hours.</h3>' +
-        '<p>Usually sooner. Keep an eye out for a message from our West Austin number.</p>' +
-        '</div>';
-      wrap.scrollIntoView({ block: "center" });
-    }).catch(function () {
-      // Network failed — fall back to a normal (redirecting) Netlify submit.
-      form.submit();
-    });
+    if (!validate()) return;
+
+    // Compose one message with the customer's details; opens a group text to
+    // both owners so their reply thread includes Ashby, Gates and the customer.
+    var lines = [
+      "Hi Ashby & Gates — I'd like a free quote for my holiday lights.",
+      "Name: " + val("f-name"),
+      "Phone: " + val("f-phone"),
+      "Email: " + val("f-email"),
+      "Address: " + val("f-address")
+    ];
+    if (val("f-notes")) lines.push("Thinking: " + val("f-notes"));
+    var hear = val("f-hear");
+    if (hear) lines.push("Heard about you via: " + hear);
+
+    track("quote_form_submit");
+    // "?&body=" is the form that works on both iOS and Android.
+    window.location.href = GROUP + "?&body=" + encodeURIComponent(lines.join("\n"));
+
+    // Confirmation stays on the page in case they switch back to the browser.
+    wrap.innerHTML =
+      '<div class="form-success" role="status">' +
+      '<h3>Opening a group text to Ashby &amp; Gates…</h3>' +
+      '<p>Your details are already in the message — just tap <strong>Send</strong>. ' +
+      'Nothing opened? Text <a href="tel:' + ASHBY + '">(713) 254-6153</a> or ' +
+      '<a href="tel:' + GATES + '">(409) 656-7217</a>.</p>' +
+      '</div>';
+    wrap.scrollIntoView({ block: "center" });
+  });
+
+  // Prefill a friendly opener on the standalone "text us both" group links.
+  document.querySelectorAll(".js-group-sms").forEach(function (a) {
+    a.setAttribute("href", GROUP + "?&body=" +
+      encodeURIComponent("Hi Ashby & Gates — I'd like a free quote for "));
   });
 })();
