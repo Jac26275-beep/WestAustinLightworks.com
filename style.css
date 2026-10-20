@@ -45,10 +45,15 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdro
 .circle{border-radius:50%;background:var(--xgreen);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
 
 .hero{height:min(88vh,860px);min-height:560px;position:relative;
-  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),url("assets/hero-night-install-1200.jpg");
-  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),-webkit-image-set(url("assets/hero-night-install-1200.webp") 1x);
-  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),image-set(url("assets/hero-night-install-1200.webp") type("image/webp"),url("assets/hero-night-install-1200.jpg") type("image/jpeg"));
-  background-size:cover;background-position:center 62%;}
+  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),url("assets/hero-walkway-2000.jpg");
+  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),-webkit-image-set(url("assets/hero-walkway-2000.webp") 1x);
+  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),image-set(url("assets/hero-walkway-2000.webp") type("image/webp"),url("assets/hero-walkway-2000.jpg") type("image/jpeg"));
+  background-size:cover;background-position:center 55%;}
+@media (max-width:699px){.hero{
+  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),url("assets/hero-walkway-mobile-1080.jpg");
+  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),-webkit-image-set(url("assets/hero-walkway-mobile-1080.webp") 1x);
+  background-image:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.35) 48%,rgba(0,0,0,.12) 100%),image-set(url("assets/hero-walkway-mobile-1080.webp") type("image/webp"),url("assets/hero-walkway-mobile-1080.jpg") type("image/jpeg"));
+  background-position:center 40%;}}
 
 .trust{display:flex;gap:10px 26px;flex-wrap:wrap;justify-content:center;align-items:center;font-size:15px;color:var(--ink-soft);}
 .trust .item{display:inline-flex;align-items:center;gap:8px;}
